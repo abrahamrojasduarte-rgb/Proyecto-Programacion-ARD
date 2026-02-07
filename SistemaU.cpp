@@ -1,0 +1,87 @@
+//
+// Created by Abraham on 2/6/2026.
+//
+
+#include "SistemaU.h"
+void SistemaU::registrarEstudiante(int cedula, string nombre, string carrera) {
+    Estudiante* nuevoEstudiante = new Estudiante(nombre, cedula, carrera);
+    bool s = listaEstudiantes.agregarFinal(nuevoEstudiante);
+
+    if (!s) {
+        cout<<"No se pudo agregar, estudiante ya ingresado"<<endl;
+    }else {
+        cout<<"Agregado correctamente"<<endl;
+    }
+}
+
+string SistemaU::mostrarEstudiantes() const{
+    stringstream ss;
+    ss << listaEstudiantes.toString();
+    return ss.str();
+}
+void SistemaU::registrarProfesor(int cedula, string nombre) {
+    Profesor* nuevoProfesor = new Profesor(nombre, cedula);
+    bool s = listaProfesores.agregarFinal(nuevoProfesor);
+
+    if (!s) {
+        cout<<"No se pudo agregar, profesor ya ingresado"<<endl;
+    }
+}
+
+string SistemaU::mostrarProfesores()const {
+    stringstream ss;
+    ss << listaProfesores.toString();
+    return ss.str();
+}
+
+void SistemaU::escogerHorario(int cedulaEstudiante, int dia, int hora, Curso *curso) {
+    Persona* persona = listaEstudiantes.buscar(cedulaEstudiante);
+    if (persona == nullptr) {
+        cout << "Estudiante no encontrado." << endl;
+        return;
+    }
+    Estudiante* estudiante = (Estudiante*) persona;
+
+    if (estudiante != nullptr) {
+        estudiante->escogerHorario(dia, hora, curso);
+    } else {
+        cout << "La persona con cédula no es un estudiante." << endl;
+    }
+}
+
+void SistemaU::registrarCursos(string codCurso, string nomCurso, Profesor *profesor) {
+    if (profesor == nullptr) {
+        cout<<"Profesor invalido"<<endl;
+    }
+    if (listaCursos.estaRepetidoC(codCurso)) {
+        cout<<"Curso repetido, ya esta ingresado"<<endl;
+    }
+    Curso* verano = new Curso(codCurso,nomCurso,profesor);
+    if (listaCursos.agrgarFinalC(verano)) {
+        cout<<"El curso "<<nomCurso <<" ha sido anadido correctamente "<<endl;
+    }else {
+        cout<<"No se ha podido anadir el curso"<<endl;
+    }
+}
+
+string SistemaU::mostrarCursos() const {
+    stringstream ss;
+    ss << listaCursos.toString();
+    return ss.str();
+}
+
+bool SistemaU::hayCursosDisponibles() const {
+    return listaCursos.getCantidad() > 0;
+}
+
+ListaPersona * SistemaU::getListaEstudiantes() {
+    return &listaEstudiantes;
+}
+
+ListaPersona * SistemaU::getListaProfesors() {
+    return &listaProfesores;
+}
+
+ListaCursos * SistemaU::getListaCursos() {
+    return &listaCursos;
+}
