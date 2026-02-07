@@ -22,6 +22,7 @@ private:
     void mostrarProfesores();
     void mostrarCursos();
     void escogerCurso();
+    void mostrarHorario();
 
 public:
     void mostrarMenu();

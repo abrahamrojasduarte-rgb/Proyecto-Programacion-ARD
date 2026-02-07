@@ -96,7 +96,8 @@ void Menu::iniciarSesionEstudiante() {
         cout << "\n--- Menu Estudiante ---\n";
         cout << "1. Ver Cursos Disponibles\n";
         cout << "2. Escoger Curso\n";
-        cout << "3. Salir\n";
+        cout << "3. Mostrar horario\n";
+        cout << "4. Salir\n";
         cout << "Elija una opcion: ";
         cin >> opcion;
 
@@ -108,6 +109,8 @@ void Menu::iniciarSesionEstudiante() {
                 escogerCurso();
                 break;
             case 3:
+                mostrarHorario();
+            case 4:
                 cout << "Saliendo del menu estudiante...\n";
                 break;
             default:
@@ -196,6 +199,20 @@ void Menu::escogerCurso() {
         } else {
             cout << "Curso no encontrado.\n";
         }
+    } else {
+        cout << "Estudiante no encontrado.\n";
+    }
+}
+void Menu::mostrarHorario() {
+    int cedulaEstudiante;
+    cout << "Ingrese su cedula para ver su horario: ";
+    cin >> cedulaEstudiante;
+
+    Persona* persona = sistema.getListaEstudiantes()->buscar(cedulaEstudiante);
+    if (persona != nullptr && persona->esEstudiante()) {
+        Estudiante* estudiante = (Estudiante*) persona;
+        cout << "Horario de " << estudiante->getNombre() << ":\n";
+        cout << estudiante->mostrarHorario() << endl;
     } else {
         cout << "Estudiante no encontrado.\n";
     }

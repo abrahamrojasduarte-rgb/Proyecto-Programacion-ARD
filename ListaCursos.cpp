@@ -90,3 +90,16 @@ string ListaCursos::toString() const {
 int ListaCursos::getCantidad() const {
     return this->cantidad;
 }
+
+ListaCursos::~ListaCursos() {
+    NodoCurso* actual = primero;
+    while (actual != nullptr) {
+        NodoCurso* borrar = actual;
+        delete actual->getCurso();
+        actual = actual->getSiguiente();
+        delete borrar;
+    }
+    primero = nullptr;
+    ultimo = nullptr;
+    cantidad = 0;
+}

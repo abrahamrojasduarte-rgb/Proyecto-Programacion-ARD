@@ -19,6 +19,7 @@ public:
 
     void registrarEstudiante(int cedula, string nombre, string carrera);
     string mostrarEstudiantes()const;
+    void mostrarHorario();
 
     void registrarProfesor(int cedulaP, string nombre);
     string mostrarProfesores() const;
@@ -27,6 +28,7 @@ public:
     void registrarCursos( string codCurso, string nomCurso, Profesor* profesor );
     string mostrarCursos() const;
     bool hayCursosDisponibles()const;
+
 
     ListaPersona* getListaEstudiantes();
     ListaPersona* getListaProfesors();

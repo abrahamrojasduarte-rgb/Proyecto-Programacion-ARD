@@ -15,9 +15,9 @@ ListaPersona::~ListaPersona() {
     NodoPersona* actual = primero;
     while (actual != nullptr) {
         NodoPersona* aux = actual;
-        delete aux->getPersonita();  // Eliminar el objeto Persona (Estudiante, Profesor, etc.)
-        actual = actual->getSiguiente();  // Avanzar al siguiente nodo
-        delete aux;  // Eliminar el nodo
+        delete aux->getPersonita();
+        actual = actual->getSiguiente();
+        delete aux;
     }
     primero = nullptr;
     ultimo = nullptr;

@@ -20,6 +20,7 @@ public:
     bool agrgarFinalC(Curso* curso);
     string toString()const;
     int getCantidad()const;
+    ~ListaCursos();
 };
 
 

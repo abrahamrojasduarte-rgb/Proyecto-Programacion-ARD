@@ -9,10 +9,7 @@ Curso::Curso(string codigo, string nombre, Profesor *profesorAsignado) {
     this->profesorAsignado = profesorAsignado;
 }
 
-Curso::~Curso() {
-    delete profesorAsignado;
-    profesorAsignado = nullptr;
-}
+Curso::~Curso() {}
 
 string Curso::getCodigo() const {
     return this->codigo;

@@ -19,6 +19,11 @@ string SistemaU::mostrarEstudiantes() const{
     ss << listaEstudiantes.toString();
     return ss.str();
 }
+
+void SistemaU::mostrarHorario() {
+
+}
+
 void SistemaU::registrarProfesor(int cedula, string nombre) {
     Profesor* nuevoProfesor = new Profesor(nombre, cedula);
     bool s = listaProfesores.agregarFinal(nuevoProfesor);

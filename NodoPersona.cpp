@@ -29,6 +29,7 @@ NodoPersona *NodoPersona::getSiguiente() {
 
 NodoPersona::~NodoPersona() {
     delete personita;
+    delete siguiente;
     personita = nullptr;
     siguiente = nullptr;
 }
