@@ -35,17 +35,11 @@ string SistemaU::mostrarProfesores()const {
 }
 
 void SistemaU::escogerHorario(int cedulaEstudiante, int dia, int hora, Curso *curso) {
-    Persona* persona = listaEstudiantes.buscar(cedulaEstudiante);
-    if (persona == nullptr) {
-        cout << "Estudiante no encontrado." << endl;
-        return;
-    }
-    Estudiante* estudiante = (Estudiante*) persona;
-
+    Estudiante* estudiante = (Estudiante*)listaEstudiantes.buscar(cedulaEstudiante);
     if (estudiante != nullptr) {
         estudiante->escogerHorario(dia, hora, curso);
     } else {
-        cout << "La persona con cédula no es un estudiante." << endl;
+        cout << "Estudiante no encontrado." << endl;
     }
 }
 

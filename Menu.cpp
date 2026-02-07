@@ -29,11 +29,12 @@ void Menu::mostrarMenu() {
     }
 }
 void Menu::iniciarSesionAdministrador() {
-    string usuario, contrasena;
+    string usuario, cedula;
     cout << "Ingrese su nombre de usuario: ";
     cin >> usuario;
-    cout << "Ingrese su contrasena: ";
-    cin >> contrasena;
+    cout << "Ingrese su cedula: ";
+    cin.ignore();
+    getline(cin,cedula);
 
     cout << "Bienvenido, administrador: " << usuario << endl;
 
@@ -81,8 +82,12 @@ void Menu::iniciarSesionAdministrador() {
 
 void Menu::iniciarSesionEstudiante() {
     string usuario;
+    int cedula;
     cout << "Ingrese su nombre de usuario: ";
     cin >> usuario;
+    cout << "Ingrese su cedula: ";
+    cin.ignore();
+    cin>>cedula;
 
     cout << "Bienvenido, estudiante: " << usuario << endl;
 

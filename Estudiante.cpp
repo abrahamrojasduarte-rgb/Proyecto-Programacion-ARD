@@ -11,6 +11,7 @@ Estudiante::Estudiante() : Persona() {
 
 Estudiante::Estudiante(string n, int c, string carrera) : Persona(n, c) {
     this->carrera = carrera;
+    this->miHorario = new Horario();
 }
 
 Estudiante::~Estudiante() {

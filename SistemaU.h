@@ -3,6 +3,7 @@
 //
 
 #ifndef PROYECTO_PROGRAMACION_ARD_SISTEMAU_H
+#define PROYECTO_PROGRAMACION_ARD_SISTEMAU_H
 #include "Persona.h"
 #include "ListaPersona.h"
 #include "Estudiante.h"
