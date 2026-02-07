@@ -4,6 +4,12 @@
 
 #include "ListaCursos.h"
 
+ListaCursos::ListaCursos() {
+    ultimo = nullptr;
+    cantidad = 0;
+    primero = nullptr;
+}
+
 bool ListaCursos::estaVaciaC() {
     return primero == nullptr;
 }

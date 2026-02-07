@@ -13,8 +13,10 @@ private:
     string codigo;
     string nombre;
     Profesor *profesorAsignado;
+    int dia;
+    int hora;
 public:
-    Curso(string codigo, string nombre, Profesor* profesorAsignado);
+    Curso(string codigo, string nombre, Profesor* profesorAsignado,int d,int h);
     ~Curso();
     string getCodigo() const;
     string getNombre() const;
@@ -24,6 +26,9 @@ public:
     bool setProfesor(Profesor* profesor);
 
     string toString() const;
+
+    int getDia() const;
+    int getHora() const;
 };
 
 

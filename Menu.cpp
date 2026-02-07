@@ -71,6 +71,11 @@ void Menu::iniciarSesionAdministrador() {
                 mostrarCursos();
                 break;
             case 7:
+                guardarEstudianteArchivo(FILE* archivo);
+                break;
+            case 8:
+                guardarProfesoresArchivo()
+            case 9:
                 cout << "Saliendo del menu administrador...\n";
                 break;
             default:
@@ -78,6 +83,7 @@ void Menu::iniciarSesionAdministrador() {
                 break;
         }
     } while (opcion != 7);
+    mostrarMenu();
 }
 
 void Menu::iniciarSesionEstudiante() {
@@ -117,7 +123,8 @@ void Menu::iniciarSesionEstudiante() {
                 cout << "Opcion no valida. Intente de nuevo." << endl;
                 break;
         }
-    } while (opcion != 3);
+    } while (opcion != 4);
+    mostrarMenu();
 }
 void Menu::registrarEstudiante() {
     int cedula;
@@ -145,20 +152,24 @@ void Menu::registrarProfesor() {
 
 void Menu::registrarCurso() {
     string codigo, nombre;
-    int cedulaProfesor;
+    int cedulaProfesor,diaC, horaC;
     cout << "Ingrese el codigo del curso: ";
     cin >> codigo;
     cout << "Ingrese el nombre del curso: ";
-    cin.ignore();  // Limpiar el buffer
+    cin.ignore();
     getline(cin, nombre);
     cout << "Ingrese la cedula del profesor asignado: ";
     cin >> cedulaProfesor;
+    cout<<"Ingrese el dia y hora del curso: "<<endl;
+    cin.ignore();
+    cin>>diaC;
+    cin>>horaC;
 
-    Persona* persona = sistema.getListaEstudiantes()->buscar(cedulaProfesor);
+    Persona* persona = sistema.getListaProfesors()->buscar(cedulaProfesor);
 
     if (persona != nullptr && persona->esProfesor()) {
         Profesor* profesor = (Profesor*) persona;
-        sistema.registrarCursos(codigo, nombre, profesor);
+        sistema.registrarCursos(codigo, nombre, profesor, diaC, horaC);
     } else {
         cout << "Profesor no encontrado o no es un profesor.\n";
     }
@@ -216,4 +227,12 @@ void Menu::mostrarHorario() {
     } else {
         cout << "Estudiante no encontrado.\n";
     }
+}
+
+void Menu::guardarEstudianteArchivo(FILE* archivo) {
+    sistema.guardarEstudiantesArchivo(archivo);
+}
+
+void Menu::guardarProfesoresArchivo(FILE *archivo) {
+    sistema.guardarProfesoresArchivo(archivo);
 }

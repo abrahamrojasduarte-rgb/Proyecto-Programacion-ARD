@@ -30,6 +30,8 @@ void SistemaU::registrarProfesor(int cedula, string nombre) {
 
     if (!s) {
         cout<<"No se pudo agregar, profesor ya ingresado"<<endl;
+    }else {
+        cout<<"Si se agrego correctamente"<<endl;
     }
 }
 
@@ -48,14 +50,14 @@ void SistemaU::escogerHorario(int cedulaEstudiante, int dia, int hora, Curso *cu
     }
 }
 
-void SistemaU::registrarCursos(string codCurso, string nomCurso, Profesor *profesor) {
+void SistemaU::registrarCursos(string codCurso, string nomCurso, Profesor *profesor, int d, int h) {
     if (profesor == nullptr) {
         cout<<"Profesor invalido"<<endl;
     }
     if (listaCursos.estaRepetidoC(codCurso)) {
         cout<<"Curso repetido, ya esta ingresado"<<endl;
     }
-    Curso* verano = new Curso(codCurso,nomCurso,profesor);
+    Curso* verano = new Curso(codCurso,nomCurso,profesor,d,h);
     if (listaCursos.agrgarFinalC(verano)) {
         cout<<"El curso "<<nomCurso <<" ha sido anadido correctamente "<<endl;
     }else {
@@ -83,4 +85,12 @@ ListaPersona * SistemaU::getListaProfesors() {
 
 ListaCursos * SistemaU::getListaCursos() {
     return &listaCursos;
+}
+
+void SistemaU::guardarEstudiantesArchivo(FILE *archivo) {
+    listaEstudiantes.guardarEnArchivoEstudiantes(archivo);
+}
+
+void SistemaU::guardarProfesoresArchivo(FILE *archivo) {
+    listaProfesores.guardarEnArchivoProfesores(archivo);
 }

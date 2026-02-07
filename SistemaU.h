@@ -25,14 +25,16 @@ public:
     string mostrarProfesores() const;
     void escogerHorario(int cedulaEstudiante, int dia, int hora, Curso* curso);
 
-    void registrarCursos( string codCurso, string nomCurso, Profesor* profesor );
+    void registrarCursos( string codCurso, string nomCurso, Profesor* profesor, int, int);
     string mostrarCursos() const;
     bool hayCursosDisponibles()const;
-
 
     ListaPersona* getListaEstudiantes();
     ListaPersona* getListaProfesors();
     ListaCursos* getListaCursos();
+
+    void guardarEstudiantesArchivo(FILE* archivo);
+    void guardarProfesoresArchivo(FILE* archivo);
 };
 
 

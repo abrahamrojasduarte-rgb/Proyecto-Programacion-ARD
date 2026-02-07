@@ -3,10 +3,12 @@
 //
 
 #include "Curso.h"
-Curso::Curso(string codigo, string nombre, Profesor *profesorAsignado) {
+Curso::Curso(string codigo, string nombre, Profesor *profesorAsignado, int d, int h) {
     this->codigo = codigo;
     this->nombre = nombre;
     this->profesorAsignado = profesorAsignado;
+    this->hora = h;
+    this-> dia = d;
 }
 
 Curso::~Curso() {}
@@ -42,4 +44,12 @@ string Curso::toString() const {
         <<"Codigo :"<<this->codigo<<endl
         <<"Profesor :"<<this->profesorAsignado->getNombre()<<endl;
     return ss.str();
+}
+
+int Curso::getDia() const {
+    return this->dia;
+}
+
+int Curso::getHora() const {
+    return this->hora;
 }

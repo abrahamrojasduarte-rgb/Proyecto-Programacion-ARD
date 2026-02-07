@@ -4,6 +4,7 @@
 #include "Profesor.h"
 #include "Curso.h"
 #include "Menu.h"
+#include "ListaPersona.h"
 
 using namespace std;
 
@@ -43,5 +44,7 @@ int main() {
     Menu menumain;
 
     menumain.mostrarMenu();
+
+    ListaPersona *actual = new ListaPersona();
     return 0;
 };

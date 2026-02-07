@@ -25,4 +25,6 @@ add_executable(Proyecto_Programacion_ARD main.cpp
         SistemaU.cpp
         SistemaU.h
         Menu.cpp
-        Menu.h)
+        Menu.h
+        AdminArchivos.cpp
+        AdminArchivos.h)

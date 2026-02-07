@@ -13,6 +13,7 @@ private:
     NodoCurso* ultimo;
     int cantidad;
 public:
+    ListaCursos();
     bool estaVaciaC();
     bool estaRepetidoC(string codCurso);
     Curso* buscarC(string codCurso);

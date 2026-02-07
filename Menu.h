@@ -23,6 +23,8 @@ private:
     void mostrarCursos();
     void escogerCurso();
     void mostrarHorario();
+    void guardarEstudianteArchivo(FILE* archivo);
+    void guardarProfesoresArchivo(FILE* archivo);
 
 public:
     void mostrarMenu();

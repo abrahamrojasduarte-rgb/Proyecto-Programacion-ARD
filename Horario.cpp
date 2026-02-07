@@ -41,7 +41,7 @@ bool Horario::asignarCurso(Curso *curso, int dia, int hora) {
     if (curso == nullptr) {
         return false;
     }
-    matriz[dia][hora] = curso;
+    matriz[curso->getDia()][curso->getHora()] = curso;
     return true;
 }
 
@@ -60,7 +60,7 @@ string Horario::toString() const {
                                   "1:00-2:00", "2:00-3:00", "3:00-4:00", "4:00-5:00", "5:00-6:00", "6:00-7:00",
                                   "7:00-8:00", "8:00-9:00"};
     for (int i = 0; i < dias; ++i) {
-        ss << diasDeSemana[i];
+        ss << diasDeSemana[i]<<endl;
         for (int j = 0; j < horas; ++j) {
             ss << horasParaCursos[j];
             if (matriz[i][j] == nullptr) {

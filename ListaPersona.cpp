@@ -99,3 +99,23 @@ string ListaPersona::toString() const {
     return ss.str();
 }
 
+void ListaPersona::guardarEnArchivoProfesores(FILE *archivo) {
+    NodoPersona* actual = primero;
+    while (actual != nullptr) {
+        if (actual->getPersonita()->esProfesor()) {
+            fprintf (archivo, "%s", actual->getPersonita()->toString().c_str());
+            actual = actual->getSiguiente();
+        }
+    }
+}
+
+void ListaPersona::guardarEnArchivoEstudiantes(FILE *archivo) {
+    NodoPersona* actual = primero;
+    while (actual != nullptr) {
+        if (actual->getPersonita()->esEstudiante()) {
+            fprintf (archivo, "%s", actual->getPersonita()->toString().c_str());
+            actual = actual->getSiguiente();
+        }
+    }
+}
+

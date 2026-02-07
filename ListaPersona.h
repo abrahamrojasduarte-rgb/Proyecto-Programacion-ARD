@@ -22,6 +22,8 @@ public:
     bool agregarFinal(Persona* persona);
     bool elimina(int c);
     string toString()const;
+    void guardarEnArchivoProfesores(FILE * archivo);
+    void guardarEnArchivoEstudiantes(FILE * archivo);
 };
 
 
