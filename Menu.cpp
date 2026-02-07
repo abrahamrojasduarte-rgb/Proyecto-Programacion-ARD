@@ -47,7 +47,7 @@ void Menu::iniciarSesionAdministrador() {
         cout << "4. Mostrar Estudiantes\n";
         cout << "5. Mostrar Profesores\n";
         cout << "6. Mostrar Cursos\n";
-        cout << "7. Salir\n";
+        cout << "9. Salir\n";
         cout << "Elija una opcion: ";
         cin >> opcion;
 
@@ -71,10 +71,12 @@ void Menu::iniciarSesionAdministrador() {
                 mostrarCursos();
                 break;
             case 7:
-                guardarEstudianteArchivo(FILE* archivo);
+                //guardarEstudianteArchivo(FILE* archivo);
+                cout<<"";
                 break;
             case 8:
-                guardarProfesoresArchivo()
+                cout<<"";
+                //guardarProfesoresArchivo()
             case 9:
                 cout << "Saliendo del menu administrador...\n";
                 break;
@@ -82,7 +84,7 @@ void Menu::iniciarSesionAdministrador() {
                 cout << "Opcion no valida. Intente de nuevo." << endl;
                 break;
         }
-    } while (opcion != 7);
+    } while (opcion != 9);
     mostrarMenu();
 }
 
