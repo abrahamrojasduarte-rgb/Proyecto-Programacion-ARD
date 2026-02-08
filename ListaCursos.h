@@ -22,6 +22,7 @@ public:
     string toString()const;
     int getCantidad()const;
     ~ListaCursos();
+    void guardarEnArchivo(FILE* Archivo);
 };
 
 

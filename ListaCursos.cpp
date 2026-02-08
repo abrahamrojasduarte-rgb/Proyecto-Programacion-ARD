@@ -109,3 +109,11 @@ ListaCursos::~ListaCursos() {
     ultimo = nullptr;
     cantidad = 0;
 }
+
+void ListaCursos::guardarEnArchivo(FILE *Archivo) {
+    NodoCurso* ya = primero;
+    while (ya != nullptr) {
+        fprintf(Archivo,"%s", ya->getCurso()->toString().c_str());
+        ya = ya->getSiguiente();
+    }
+}

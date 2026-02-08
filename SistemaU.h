@@ -33,8 +33,7 @@ public:
     ListaPersona* getListaProfesors();
     ListaCursos* getListaCursos();
 
-    void guardarEstudiantesArchivo(FILE* archivo);
-    void guardarProfesoresArchivo(FILE* archivo);
+    void guardarDatosTXT();
 };
 
 

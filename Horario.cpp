@@ -32,7 +32,7 @@ void Horario::liberarMemoria() {
     }
 }
 bool Horario::indicesValidos(int dia, int hora) const{
-    return dia >= 0 && dia < dias && hora >= 0 && hora < horas;
+    return (dia >= 0 && dia < dias && hora >= 0 && hora < horas);
 }
 bool Horario::asignarCurso(Curso *curso, int dia, int hora) {
     if (!indicesValidos(dia, hora)) {
@@ -46,11 +46,10 @@ bool Horario::asignarCurso(Curso *curso, int dia, int hora) {
 }
 
 Curso * Horario::getCurso(int dia, int hora) const {
-    if (indicesValidos(dia, hora)) {
-        return matriz[dia][hora];
-    }else{
+    if (!indicesValidos(dia, hora)) {
         return nullptr;
     }
+    return matriz[dia][hora];
 }
 
 string Horario::toString() const {

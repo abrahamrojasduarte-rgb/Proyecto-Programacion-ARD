@@ -47,7 +47,8 @@ void Menu::iniciarSesionAdministrador() {
         cout << "4. Mostrar Estudiantes\n";
         cout << "5. Mostrar Profesores\n";
         cout << "6. Mostrar Cursos\n";
-        cout << "9. Salir\n";
+        cout << "7. Guardar TXT\n";
+        cout << "8. Salir\n";
         cout << "Elija una opcion: ";
         cin >> opcion;
 
@@ -71,20 +72,16 @@ void Menu::iniciarSesionAdministrador() {
                 mostrarCursos();
                 break;
             case 7:
-                //guardarEstudianteArchivo(FILE* archivo);
-                cout<<"";
+                guardarloEnTXT();
                 break;
             case 8:
-                cout<<"";
-                //guardarProfesoresArchivo()
-            case 9:
                 cout << "Saliendo del menu administrador...\n";
                 break;
             default:
                 cout << "Opcion no valida. Intente de nuevo." << endl;
                 break;
         }
-    } while (opcion != 9);
+    } while (opcion != 8);
     mostrarMenu();
 }
 
@@ -231,10 +228,8 @@ void Menu::mostrarHorario() {
     }
 }
 
-void Menu::guardarEstudianteArchivo(FILE* archivo) {
-    sistema.guardarEstudiantesArchivo(archivo);
+void Menu::guardarloEnTXT() {
+    sistema.guardarDatosTXT();
 }
 
-void Menu::guardarProfesoresArchivo(FILE *archivo) {
-    sistema.guardarProfesoresArchivo(archivo);
-}
+

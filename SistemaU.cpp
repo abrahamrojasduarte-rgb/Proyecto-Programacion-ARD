@@ -87,10 +87,18 @@ ListaCursos * SistemaU::getListaCursos() {
     return &listaCursos;
 }
 
-void SistemaU::guardarEstudiantesArchivo(FILE *archivo) {
-    listaEstudiantes.guardarEnArchivoEstudiantes(archivo);
+void SistemaU::guardarDatosTXT() {
+    FILE* Archivo = fopen("Archivo.txt", "w");
+    if (!Archivo) {
+        cout << "ERROR DE ARCHIVO\n";
+        return;
+    }
+
+    fprintf(Archivo, "ESTUDIANTES:\n");
+    listaEstudiantes.guardarEnArchivoEstudiantes(Archivo);
+    fprintf(Archivo, "\nPROFESORES:\n");
+    listaProfesores.guardarEnArchivoProfesores(Archivo);
+    fprintf(Archivo, "\nCURSOS:\n");
+    listaCursos.guardarEnArchivo(Archivo);
 }
 
-void SistemaU::guardarProfesoresArchivo(FILE *archivo) {
-    listaProfesores.guardarEnArchivoProfesores(archivo);
-}
