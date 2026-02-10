@@ -42,12 +42,12 @@ bool Estudiante::esEstudiante() {
 void Estudiante::escogerHorario(int d, int h, Curso *curso) {
     if (miHorario->getCurso(d,h) == nullptr) {
         if (miHorario->asignarCurso(curso,d,h)) {
-            cout<<"Si pudiste agregar el curso a tu horario :)"<<endl;
-        }else {
-            cout<<"Datos invalidos !!! "<<endl;
+            cout << "Si pudiste agregar el curso a tu horario :)" << endl;
+        } else {
+            cout << "Datos invalidos!!!" << endl;
         }
-    }else {
-        cout<<"Conflicto de horario"<<endl;
+    } else {
+        cout << "Conflicto de horario: ya hay un curso asignado en este horario." << endl;
     }
 }
 
@@ -55,4 +55,14 @@ string Estudiante::mostrarHorario() const{
     stringstream ss;
     ss<<miHorario->toString();
     return ss.str();
+}
+bool Estudiante::quitarCurso(int d, int h) {
+    if (miHorario->getCurso(d, h) != nullptr) {
+        miHorario->asignarCurso(nullptr, d, h);
+        cout << "Curso eliminado del horario!" << endl;
+        return true;
+    } else {
+        cout << "No hay curso asignado a esa hora." << endl;
+        return false;
+    }
 }

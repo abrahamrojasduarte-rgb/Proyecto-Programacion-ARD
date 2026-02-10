@@ -8,7 +8,6 @@ Profesor::Profesor() : Persona(){
 }
 
 Profesor::Profesor(string n, int c) : Persona(n, c) {
-
 }
 
 bool Profesor::esProfesor() {

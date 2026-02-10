@@ -43,18 +43,21 @@ bool ListaPersona::agregarFinal(Persona *persona) {
     if (persona == nullptr) {
         return false;
     }
+
     if (buscar(persona->getCedula()) != nullptr) {
         return false;
     }
+
     NodoPersona* Phineas = new NodoPersona(persona, nullptr);
     if (estaVacia()) {
         ultimo = Phineas;
         primero = Phineas;
-    }else {
+    } else {
         ultimo->setSiguiente(Phineas);
         ultimo = Phineas;
     }
-    cantidad ++;
+    cantidad++;
+
     return true;
 }
 
@@ -62,30 +65,32 @@ bool ListaPersona::elimina(int c) {
     if (estaVacia()) {
         return false;
     }
+
     if (primero->getPersonita()->getCedula() == c) {
-        NodoPersona* borrar = primero;
+        NodoPersona* chao = primero;
         primero = primero->getSiguiente();
         if (primero == nullptr) {
             ultimo = nullptr;
         }
-        delete borrar;
-        cantidad --;
+        delete chao;
+        cantidad--;
         return true;
     }
     NodoPersona* aux = primero;
-    while (aux->getPersonita() != nullptr) {
+    while (aux->getSiguiente() != nullptr) {
         if (aux->getSiguiente()->getPersonita()->getCedula() == c) {
             NodoPersona* borrar = aux->getSiguiente();
             aux->setSiguiente(borrar->getSiguiente());
             if (borrar == ultimo) {
-                ultimo = borrar;
+                ultimo = aux;
             }
             delete borrar;
-            cantidad --;
+            cantidad--;
             return true;
         }
         aux = aux->getSiguiente();
     }
+
     return false;
 }
 
@@ -93,7 +98,7 @@ string ListaPersona::toString() const {
     stringstream ss;
     NodoPersona* actual = primero;
     while (actual != nullptr) {
-        ss << actual->getPersonita()->toString() << "-----------------------------"<<endl;
+        ss<<actual->getPersonita()->toString()<<"---------------------------------";
         actual = actual->getSiguiente();
     }
     return ss.str();
@@ -119,3 +124,6 @@ void ListaPersona::guardarEnArchivoEstudiantes(FILE *archivo) {
     }
 }
 
+int ListaPersona::getCantidad() const{
+    return this->cantidad;
+}

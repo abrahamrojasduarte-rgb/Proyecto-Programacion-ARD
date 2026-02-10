@@ -21,6 +21,7 @@ public:
     bool esEstudiante() override;
     void escogerHorario(int d, int h, Curso* curso);
     string mostrarHorario()const;
+    bool quitarCurso(int d, int h);
 };
 
 

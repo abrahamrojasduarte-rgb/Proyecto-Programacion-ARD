@@ -29,27 +29,26 @@ void Menu::mostrarMenu() {
     }
 }
 void Menu::iniciarSesionAdministrador() {
-    string usuario, cedula;
+    string usuario;
     cout << "Ingrese su nombre de usuario: ";
     cin >> usuario;
-    cout << "Ingrese su cedula: ";
-    cin.ignore();
-    getline(cin,cedula);
 
     cout << "Bienvenido, administrador: " << usuario << endl;
 
     int opcion;
     do {
-        cout << "\n--- Menu Administrador ---\n";
+        cout << "\n--- Menú Administrador ---\n";
         cout << "1. Registrar Estudiante\n";
         cout << "2. Registrar Profesor\n";
         cout << "3. Registrar Curso\n";
-        cout << "4. Mostrar Estudiantes\n";
-        cout << "5. Mostrar Profesores\n";
-        cout << "6. Mostrar Cursos\n";
-        cout << "7. Guardar TXT\n";
-        cout << "8. Salir\n";
-        cout << "Elija una opcion: ";
+        cout << "4. Eliminar Estudiante\n";
+        cout << "5. Eliminar Profesor\n";
+        cout << "6. Eliminar Curso\n";
+        cout << "7. Mostrar Estudiantes\n";
+        cout << "8. Mostrar Profesores\n";
+        cout << "9. Mostrar Cursos\n";
+        cout << "10. Salir\n";
+        cout << "Elija una opción: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -63,36 +62,38 @@ void Menu::iniciarSesionAdministrador() {
                 registrarCurso();
                 break;
             case 4:
-                mostrarEstudiantes();
+                eliminarEstudiante();
                 break;
             case 5:
-                mostrarProfesores();
+                eliminarProfesor();
                 break;
             case 6:
-                mostrarCursos();
+                eliminarCurso();
                 break;
             case 7:
-                guardarloEnTXT();
+                mostrarEstudiantes();
                 break;
             case 8:
-                cout << "Saliendo del menu administrador...\n";
+                mostrarProfesores();
+                break;
+            case 9:
+                mostrarCursos();
+                break;
+            case 10:
+                cout << "Saliendo del menú administrador...\n";
                 break;
             default:
-                cout << "Opcion no valida. Intente de nuevo." << endl;
+                cout << "Opción no válida. Intente de nuevo." << endl;
                 break;
         }
-    } while (opcion != 8);
-    mostrarMenu();
+    } while (opcion != 10);
 }
+
 
 void Menu::iniciarSesionEstudiante() {
     string usuario;
-    int cedula;
     cout << "Ingrese su nombre de usuario: ";
     cin >> usuario;
-    cout << "Ingrese su cedula: ";
-    cin.ignore();
-    cin>>cedula;
 
     cout << "Bienvenido, estudiante: " << usuario << endl;
 
@@ -102,7 +103,8 @@ void Menu::iniciarSesionEstudiante() {
         cout << "1. Ver Cursos Disponibles\n";
         cout << "2. Escoger Curso\n";
         cout << "3. Mostrar horario\n";
-        cout << "4. Salir\n";
+        cout << "4. Quitar curso \n ";
+        cout << "5. Salir\n";
         cout << "Elija una opcion: ";
         cin >> opcion;
 
@@ -116,13 +118,16 @@ void Menu::iniciarSesionEstudiante() {
             case 3:
                 mostrarHorario();
             case 4:
+                quitarCurso();
+                break;
+            case 5:
                 cout << "Saliendo del menu estudiante...\n";
                 break;
             default:
                 cout << "Opcion no valida. Intente de nuevo." << endl;
                 break;
         }
-    } while (opcion != 4);
+    } while (opcion != 5);
     mostrarMenu();
 }
 void Menu::registrarEstudiante() {
@@ -165,10 +170,8 @@ void Menu::registrarCurso() {
     cin>>horaC;
 
     Persona* persona = sistema.getListaProfesors()->buscar(cedulaProfesor);
-
     if (persona != nullptr && persona->esProfesor()) {
-        Profesor* profesor = (Profesor*) persona;
-        sistema.registrarCursos(codigo, nombre, profesor, diaC, horaC);
+        sistema.registrarCursos(codigo, nombre, cedulaProfesor, diaC, horaC);
     } else {
         cout << "Profesor no encontrado o no es un profesor.\n";
     }
@@ -191,7 +194,7 @@ void Menu::escogerCurso() {
     string codCurso;
     if (!sistema.hayCursosDisponibles()) {
         cout << "No hay cursos disponibles para inscribirse." << endl;
-        return;  // Salir de la funcion si no hay cursos
+        return;
     }
 
     cout << "Ingrese su cedula: ";
@@ -201,7 +204,6 @@ void Menu::escogerCurso() {
     Persona* persona = sistema.getListaEstudiantes()->buscar(cedulaEstudiante);
 
     if (persona != nullptr && persona->esEstudiante()) {
-        Estudiante* estudiante = (Estudiante*) persona;
         Curso* curso = sistema.getListaCursos()->buscarC(codCurso);
         if (curso != nullptr) {
             sistema.escogerHorario(cedulaEstudiante, 0, 2, curso);
@@ -232,4 +234,58 @@ void Menu::guardarloEnTXT() {
     sistema.guardarDatosTXT();
 }
 
+void Menu::eliminarEstudiante() {
+    int cedula;
+    cout << "Ingrese la cedula del estudiante a eliminar: ";
+    cin >> cedula;
 
+    if (sistema.eliminarEstudiante(cedula)) {
+        cout << "Estudiante eliminado correctamente." << endl;
+    } else {
+        cout << "No se pudo eliminar el estudiante. Verifique la cedula." << endl;
+    }
+}
+
+void Menu::eliminarProfesor() {
+    int cedula;
+    cout << "Ingrese la cedula del profesor a eliminar: ";
+    cin >> cedula;
+
+    if (sistema.eliminarProfesor(cedula)) {
+        cout << "Profesor eliminado correctamente." << endl;
+    } else {
+        cout << "No se pudo eliminar el profesor. Verifique la cedula." << endl;
+    }
+}
+
+void Menu::eliminarCurso() {
+    string codigo;
+    cout << "Ingrese el codigo del curso a eliminar: ";
+    cin >> codigo;
+
+    if (sistema.eliminarCurso(codigo)) {
+        cout << "Curso eliminado correctamente." << endl;
+    } else {
+        cout << "No se pudo eliminar el curso. Verifique el codigo." << endl;
+    }
+}
+void Menu::quitarCurso() {
+    int cedulaEstudiante, dia, hora;
+    cout << "Ingrese su cédula: ";
+    cin >> cedulaEstudiante;
+    cout << "Ingrese el día (0: Lunes, 1: Martes, ...): ";
+    cin >> dia;
+    cout << "Ingrese la hora (0-13): ";
+    cin >> hora;
+
+    Persona* persona = sistema.getListaEstudiantes()->buscar(cedulaEstudiante);
+
+    if (persona != nullptr && persona->esEstudiante()) {
+        Estudiante* estudiante = (Estudiante*) persona;
+        if (!estudiante->quitarCurso(dia, hora)) {
+            cout << "No se pudo eliminar el curso de esa hora." << endl;
+        }
+    } else {
+        cout << "Estudiante no encontrado.\n";
+    }
+}

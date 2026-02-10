@@ -6,7 +6,7 @@
 
 Persona::Persona() {
     this->cedula = 0;
-    this->nombre = "";
+    this->nombre = "klk";
 }
 
 Persona::Persona(string nombre, int cedula) {

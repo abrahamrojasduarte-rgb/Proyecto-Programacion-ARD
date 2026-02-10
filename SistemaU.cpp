@@ -10,19 +10,34 @@ void SistemaU::registrarEstudiante(int cedula, string nombre, string carrera) {
     if (!s) {
         cout<<"No se pudo agregar, estudiante ya ingresado"<<endl;
     }else {
-        cout<<"Agregado correctamente"<<endl;
+        cout<<"Estudiante "<<nombre<<" agregado correctamente"<<endl;
     }
 }
 
 string SistemaU::mostrarEstudiantes() const{
     stringstream ss;
-    ss << listaEstudiantes.toString();
+    if (listaEstudiantes.getCantidad() == 0) {
+        ss<<"No hay estudiantes ";
+    }else {
+        ss << listaEstudiantes.toString();
+    }
     return ss.str();
 }
 
 void SistemaU::mostrarHorario() {
+    int cedulaEstudiante;
+    cout << "Ingrese su cedula para ver su horario: ";
+    cin >> cedulaEstudiante;
 
-}
+    Persona* persona = listaEstudiantes.buscar(cedulaEstudiante);
+
+    if (persona != nullptr && persona->esEstudiante()) {
+        Estudiante* estudiante = (Estudiante*)persona;
+        cout << "Horario de " << estudiante->getNombre() << ":\n";
+        cout << estudiante->mostrarHorario() << endl;
+    } else {
+        cout << "Estudiante no encontrado o no es un estudiante.\n";
+    }}
 
 void SistemaU::registrarProfesor(int cedula, string nombre) {
     Profesor* nuevoProfesor = new Profesor(nombre, cedula);
@@ -31,13 +46,17 @@ void SistemaU::registrarProfesor(int cedula, string nombre) {
     if (!s) {
         cout<<"No se pudo agregar, profesor ya ingresado"<<endl;
     }else {
-        cout<<"Si se agrego correctamente"<<endl;
+        cout<<"Si se agrego  correctamente el profesor "<<nombre<<endl;
     }
 }
 
 string SistemaU::mostrarProfesores()const {
     stringstream ss;
-    ss << listaProfesores.toString();
+    if (listaProfesores.getCantidad() == 0) {
+        ss<<"No hay profesores ";
+    }else {
+        ss << listaProfesores.toString();
+    }
     return ss.str();
 }
 
@@ -50,24 +69,42 @@ void SistemaU::escogerHorario(int cedulaEstudiante, int dia, int hora, Curso *cu
     }
 }
 
-void SistemaU::registrarCursos(string codCurso, string nomCurso, Profesor *profesor, int d, int h) {
-    if (profesor == nullptr) {
-        cout<<"Profesor invalido"<<endl;
-    }
+void SistemaU::registrarCursos(string codCurso, string nomCurso, int cedulaP, int d, int h) {
     if (listaCursos.estaRepetidoC(codCurso)) {
-        cout<<"Curso repetido, ya esta ingresado"<<endl;
+        cout << "Curso repetido, ya está ingresado." << endl;
+        return;
     }
-    Curso* verano = new Curso(codCurso,nomCurso,profesor,d,h);
-    if (listaCursos.agrgarFinalC(verano)) {
-        cout<<"El curso "<<nomCurso <<" ha sido anadido correctamente "<<endl;
-    }else {
-        cout<<"No se ha podido anadir el curso"<<endl;
+
+    Persona* persona = listaProfesores.buscar(cedulaP);
+    if (persona == nullptr || !persona->esProfesor()) {
+        cout << "Profesor inválido." << endl;
+        return;
+    }
+
+    Profesor* profesor = (Profesor*)persona;
+
+    for (int i = 0; i < listaCursos.getCantidad(); i++) {
+        Curso* cursoExistente = listaCursos.buscarC(codCurso);
+        if (cursoExistente != nullptr && cursoExistente->getDia() == d && cursoExistente->getHora() == h) {
+            cout << "Conflicto de horario. El curso ya está asignado." << endl;
+            return;
+        }
+    }
+    Curso* nuevoCurso = new Curso(codCurso, nomCurso, profesor, d, h);
+    if (listaCursos.agrgarFinalC(nuevoCurso)) {
+        cout << "El curso " << nomCurso << " ha sido agregado correctamente." << endl;
+    } else {
+        cout << "No se ha podido agregar el curso." << endl;
     }
 }
 
 string SistemaU::mostrarCursos() const {
     stringstream ss;
+    if (listaCursos.getCantidad() == 0) {
+        ss<<"No hay cursos";
+    }else{
     ss << listaCursos.toString();
+    }
     return ss.str();
 }
 
@@ -100,5 +137,49 @@ void SistemaU::guardarDatosTXT() {
     listaProfesores.guardarEnArchivoProfesores(Archivo);
     fprintf(Archivo, "\nCURSOS:\n");
     listaCursos.guardarEnArchivo(Archivo);
+    cout<<"Anadidos correctamente "<<endl;
 }
 
+bool SistemaU::eliminarEstudiante(int cedula) {
+    Persona* persona = listaEstudiantes.buscar(cedula);
+    if (persona != nullptr && persona->esEstudiante()) {
+        if (listaEstudiantes.elimina(cedula)) {
+            cout << "Estudiante eliminado correctamente." << endl;
+            return true;
+        } else {
+            cout << "No se pudo eliminar el estudiante. Verifique si está en la lista." << endl;
+            return false;
+        }
+    } else {
+        cout << "Estudiante no encontrado." << endl;
+        return false;
+    }
+}
+
+bool SistemaU::eliminarProfesor(int cedula) {
+    Persona* persona = listaProfesores.buscar(cedula);
+    if (persona != nullptr && persona->esProfesor()) {
+        if (listaProfesores.elimina(cedula)) {
+            cout << "Profesor eliminado correctamente." << endl;
+            return true;
+        } else {
+            cout << "No se pudo eliminar el profesor. Verifique si está en la lista." << endl;
+            return false;
+        }
+    } else {
+        cout << "Profesor no encontrado." << endl;
+        return false;
+    }
+}
+bool SistemaU::eliminarCurso(string codCurso) {
+    Curso* curso = listaCursos.buscarC(codCurso);
+    if (curso != nullptr) {
+        if (listaCursos.eliminarC(codCurso)){
+            cout << "Curso eliminado correctamente." << endl;
+            return true;
+            } else {
+            cout << "No se pudo eliminar el curso " << endl;
+        return false;
+        }
+    }
+}

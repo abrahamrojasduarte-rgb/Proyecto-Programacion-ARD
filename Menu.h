@@ -24,6 +24,10 @@ private:
     void escogerCurso();
     void mostrarHorario();
     void guardarloEnTXT();
+    void eliminarCurso();
+    void eliminarProfesor();
+    void eliminarEstudiante();
+    void quitarCurso();
 
 public:
     void mostrarMenu();

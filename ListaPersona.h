@@ -24,6 +24,7 @@ public:
     string toString()const;
     void guardarEnArchivoProfesores(FILE * archivo);
     void guardarEnArchivoEstudiantes(FILE * archivo);
+    int getCantidad()const;
 };
 
 

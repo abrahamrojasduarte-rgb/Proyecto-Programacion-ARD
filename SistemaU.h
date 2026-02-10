@@ -25,13 +25,17 @@ public:
     string mostrarProfesores() const;
     void escogerHorario(int cedulaEstudiante, int dia, int hora, Curso* curso);
 
-    void registrarCursos( string codCurso, string nomCurso, Profesor* profesor, int, int);
+    void registrarCursos( string codCurso, string nomCurso, int, int, int);
     string mostrarCursos() const;
     bool hayCursosDisponibles()const;
 
     ListaPersona* getListaEstudiantes();
     ListaPersona* getListaProfesors();
     ListaCursos* getListaCursos();
+
+    bool eliminarEstudiante(int cedula);
+    bool eliminarProfesor(int cedula);
+    bool eliminarCurso(string codCurso);
 
     void guardarDatosTXT();
 };

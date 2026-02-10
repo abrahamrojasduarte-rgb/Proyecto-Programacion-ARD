@@ -46,18 +46,18 @@ bool Horario::asignarCurso(Curso *curso, int dia, int hora) {
 }
 
 Curso * Horario::getCurso(int dia, int hora) const {
-    if (!indicesValidos(dia, hora)) {
-        return nullptr;
+    if (indicesValidos(dia, hora)) {
+        return matriz[dia][hora];
     }
-    return matriz[dia][hora];
+    return nullptr;
 }
 
 string Horario::toString() const {
     stringstream ss;
-    string diasDeSemana[5] = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
-    string horasParaCursos[14] = {"7:00-8:00", "8:00-9:00", "9:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-1:00",
-                                  "1:00-2:00", "2:00-3:00", "3:00-4:00", "4:00-5:00", "5:00-6:00", "6:00-7:00",
-                                  "7:00-8:00", "8:00-9:00"};
+    string diasDeSemana[5] = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes"};
+    string horasParaCursos[14] = {"7:00-8:00 a.m - ", "8:00-9:00 a.m - ", "9:00-10:00 a.m - ", "10:00-11:00 a.m - ", "11:00-12:00 a.m - ",
+                                  "12:00-1:00 p.m - ","1:00-2:00 p.m - ", "2:00-3:00 p.m - ", "3:00-4:00 p.m - ", "4:00-5:00 p.m - ",
+                                  "5:00-6:00 p.m - ", "6:00-7:00 p.m - ","7:00-8:00 p.m - ", "8:00-9:00 p.m - "};
     for (int i = 0; i < dias; ++i) {
         ss << diasDeSemana[i]<<endl;
         for (int j = 0; j < horas; ++j) {
