@@ -117,3 +117,7 @@ void ListaCursos::guardarEnArchivo(FILE *Archivo) {
         ya = ya->getSiguiente();
     }
 }
+
+NodoCurso * ListaCursos::getPrimero() {
+    return this->primero;
+}

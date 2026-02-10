@@ -22,6 +22,8 @@ int main() {
     cout << "Registrando cursos..." << endl;
     sistema.registrarCursos("C001", "Calculo I", 11223344, 1, 8);
     sistema.registrarCursos("C002", "Programacion I", 22334455, 0, 2);
+    sistema.registrarCursos("C003", "Ingles",22334455, 2, 4);
+    sistema.registrarCursos("C004","General I", 22334455, 2,4);
 
     cout << "\n--- Mostrar Estudiantes ---" << endl;
     cout << sistema.mostrarEstudiantes() << endl;
@@ -33,22 +35,26 @@ int main() {
     cout << sistema.mostrarCursos() << endl;
 
     cout << "\n--- Estudiante escoge cursos ---" << endl;
-    sistema.escogerHorario(123456789, 0, 2, sistema.getListaCursos()->buscarC("C001"));
-    sistema.escogerHorario(123456789, 0, 2, sistema.getListaCursos()->buscarC("C002"));
+    sistema.escogerHorario(123456789, sistema.getListaCursos()->buscarC("C001"));
+    sistema.escogerHorario(123456789,sistema.getListaCursos()->buscarC("C002"));
+    sistema.escogerHorario(987654321,sistema.getListaCursos()->buscarC("C003"));
+    sistema.escogerHorario(987654321,sistema.getListaCursos()->buscarC("C004"));
 
     cout << "\n--- Mostrar Horario del Estudiante ---" << endl;
     sistema.mostrarHorario();
+    sistema.mostrarHorario();
+
 
     cout << "\n--- Eliminar Estudiante, Profesor y Curso ---" << endl;
-    sistema.eliminarEstudiante(987654321);
-    //sistema.eliminarProfesor(11223344);
-    sistema.eliminarCurso("C002");
+    sistema.eliminarEstudiante(123456789);
+    sistema.eliminarProfesor(11223344);
+    sistema.eliminarCurso("C001");
 
     cout << "\n--- Mostrar Estudiantes Despues de Eliminar ---" << endl;
     cout << sistema.mostrarEstudiantes() << endl;
 
     cout << "\n--- Mostrar Profesores Despues de Eliminar ---" << endl;
-    //cout << sistema.mostrarProfesores() << endl;
+    cout << sistema.mostrarProfesores() << endl;
 
     cout << "\n--- Mostrar Cursos Despues de Eliminar ---" << endl;
     cout << sistema.mostrarCursos() << endl;

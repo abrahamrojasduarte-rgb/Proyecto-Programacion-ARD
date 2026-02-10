@@ -206,7 +206,7 @@ void Menu::escogerCurso() {
     if (persona != nullptr && persona->esEstudiante()) {
         Curso* curso = sistema.getListaCursos()->buscarC(codCurso);
         if (curso != nullptr) {
-            sistema.escogerHorario(cedulaEstudiante, 0, 2, curso);
+            sistema.escogerHorario(cedulaEstudiante,curso);
             cout << "Curso escogido exitosamente.\n";
         } else {
             cout << "Curso no encontrado.\n";

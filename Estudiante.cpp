@@ -39,7 +39,9 @@ bool Estudiante::esEstudiante() {
     return true;
 }
 
-void Estudiante::escogerHorario(int d, int h, Curso *curso) {
+void Estudiante::escogerHorario(Curso *curso) {
+    int d = curso->getDia();
+    int h = curso->getHora();
     if (miHorario->getCurso(d,h) == nullptr) {
         if (miHorario->asignarCurso(curso,d,h)) {
             cout << "Si pudiste agregar el curso a tu horario :)" << endl;

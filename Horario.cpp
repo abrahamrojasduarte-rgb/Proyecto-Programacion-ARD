@@ -38,10 +38,16 @@ bool Horario::asignarCurso(Curso *curso, int dia, int hora) {
     if (!indicesValidos(dia, hora)) {
         return false;
     }
+
     if (curso == nullptr) {
         return false;
     }
-    matriz[curso->getDia()][curso->getHora()] = curso;
+
+    if (matriz[dia][hora] != nullptr) {
+        cout << "Horario ocupado: Ya hay un curso asignado a este día y hora." << endl;
+        return false;
+    }
+    matriz[dia][hora] = curso;
     return true;
 }
 

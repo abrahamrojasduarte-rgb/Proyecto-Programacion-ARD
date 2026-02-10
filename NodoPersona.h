@@ -16,8 +16,8 @@ public:
     NodoPersona(Persona * personita, NodoPersona * siguiente);
     void setPersonita(Persona * personita);
     void setSiguiente(NodoPersona * personita);
-    Persona * getPersonita();
-    NodoPersona * getSiguiente();
+    Persona * getPersonita()const;
+    NodoPersona * getSiguiente()const;
     ~NodoPersona();
 };
 

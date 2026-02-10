@@ -23,6 +23,7 @@ public:
     int getCantidad()const;
     ~ListaCursos();
     void guardarEnArchivo(FILE* Archivo);
+    NodoCurso* getPrimero();
 };
 
 

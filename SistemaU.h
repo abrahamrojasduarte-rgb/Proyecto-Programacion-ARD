@@ -23,7 +23,7 @@ public:
 
     void registrarProfesor(int cedulaP, string nombre);
     string mostrarProfesores() const;
-    void escogerHorario(int cedulaEstudiante, int dia, int hora, Curso* curso);
+    void escogerHorario(int cedulaEstudiante, Curso* curso);
 
     void registrarCursos( string codCurso, string nomCurso, int, int, int);
     string mostrarCursos() const;

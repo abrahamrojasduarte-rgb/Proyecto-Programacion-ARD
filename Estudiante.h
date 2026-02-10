@@ -19,7 +19,7 @@ public:
     string getCarrera()const;
     string toString() const override;
     bool esEstudiante() override;
-    void escogerHorario(int d, int h, Curso* curso);
+    void escogerHorario(Curso* curso);
     string mostrarHorario()const;
     bool quitarCurso(int d, int h);
 };

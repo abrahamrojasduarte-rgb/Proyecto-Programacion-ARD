@@ -60,10 +60,11 @@ string SistemaU::mostrarProfesores()const {
     return ss.str();
 }
 
-void SistemaU::escogerHorario(int cedulaEstudiante, int dia, int hora, Curso *curso) {
+void SistemaU::escogerHorario(int cedulaEstudiante, Curso *curso) {
     Estudiante* estudiante = (Estudiante*)listaEstudiantes.buscar(cedulaEstudiante);
-    if (estudiante != nullptr) {
-        estudiante->escogerHorario(dia, hora, curso);
+
+    if (estudiante != nullptr && hayCursosDisponibles()) {
+        estudiante->escogerHorario(curso);
     } else {
         cout << "Estudiante no encontrado." << endl;
     }
@@ -161,6 +162,13 @@ bool SistemaU::eliminarProfesor(int cedula) {
     if (persona != nullptr && persona->esProfesor()) {
         if (listaProfesores.elimina(cedula)) {
             cout << "Profesor eliminado correctamente." << endl;
+            NodoCurso* actual = listaCursos.getPrimero();
+            while (actual != nullptr) {
+                if (actual->getCurso()->getProfesor() == persona) {
+                    listaCursos.eliminarC(actual->getCurso()->getCodigo());
+                }
+                actual = actual->getSiguiente();
+            }
             return true;
         } else {
             cout << "No se pudo eliminar el profesor. Verifique si está en la lista." << endl;
@@ -174,12 +182,15 @@ bool SistemaU::eliminarProfesor(int cedula) {
 bool SistemaU::eliminarCurso(string codCurso) {
     Curso* curso = listaCursos.buscarC(codCurso);
     if (curso != nullptr) {
-        if (listaCursos.eliminarC(codCurso)){
+        if (listaCursos.eliminarC(codCurso)) {
             cout << "Curso eliminado correctamente." << endl;
             return true;
-            } else {
-            cout << "No se pudo eliminar el curso " << endl;
-        return false;
+        } else {
+            cout << "No se pudo eliminar el curso " << codCurso << endl;
+            return false;
         }
+    } else {
+        cout << "Curso no encontrado" << endl;
+        return false;
     }
 }

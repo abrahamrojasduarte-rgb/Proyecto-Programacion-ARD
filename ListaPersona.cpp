@@ -41,20 +41,21 @@ Persona * ListaPersona::buscar(int c) const {
 
 bool ListaPersona::agregarFinal(Persona *persona) {
     if (persona == nullptr) {
-        return false;
+        return false;  // Si la persona es nula, no se puede agregar
     }
 
+    // Verificamos si ya existe una persona con la misma cédula
     if (buscar(persona->getCedula()) != nullptr) {
-        return false;
+        return false;  // Si ya existe, no la agregamos
     }
 
     NodoPersona* Phineas = new NodoPersona(persona, nullptr);
     if (estaVacia()) {
-        ultimo = Phineas;
-        primero = Phineas;
+        primero = Phineas;  // Si la lista está vacía, 'primero' apunta al nuevo nodo
+        ultimo = Phineas;   // 'ultimo' también apunta al nuevo nodo
     } else {
-        ultimo->setSiguiente(Phineas);
-        ultimo = Phineas;
+        ultimo->setSiguiente(Phineas);  // Conectamos el último nodo con el nuevo nodo
+        ultimo = Phineas;  // Actualizamos 'ultimo' para que apunte al nuevo nodo
     }
     cantidad++;
 
@@ -76,8 +77,9 @@ bool ListaPersona::elimina(int c) {
         cantidad--;
         return true;
     }
+
     NodoPersona* aux = primero;
-    while (aux->getSiguiente() != nullptr) {
+    while (aux != nullptr && aux->getSiguiente() != nullptr) {
         if (aux->getSiguiente()->getPersonita()->getCedula() == c) {
             NodoPersona* borrar = aux->getSiguiente();
             aux->setSiguiente(borrar->getSiguiente());
@@ -97,8 +99,8 @@ bool ListaPersona::elimina(int c) {
 string ListaPersona::toString() const {
     stringstream ss;
     NodoPersona* actual = primero;
-    while (actual != nullptr) {
-        ss<<actual->getPersonita()->toString()<<"---------------------------------";
+    while (actual!= nullptr) {
+        ss<<actual->getPersonita()->toString()<<"--------------------------\n";
         actual = actual->getSiguiente();
     }
     return ss.str();
@@ -107,17 +109,17 @@ string ListaPersona::toString() const {
 void ListaPersona::guardarEnArchivoProfesores(FILE *archivo) {
     NodoPersona* actual = primero;
     while (actual != nullptr) {
-        if (actual->getPersonita()->esProfesor()) {
-            fprintf (archivo, "%s", actual->getPersonita()->toString().c_str());
-            actual = actual->getSiguiente();
+        if (actual->getPersonita() != nullptr && actual->getPersonita()->esProfesor()) {
+            fprintf(archivo, "%s", actual->getPersonita()->toString().c_str());
         }
+        actual = actual->getSiguiente();
     }
 }
 
 void ListaPersona::guardarEnArchivoEstudiantes(FILE *archivo) {
     NodoPersona* actual = primero;
     while (actual != nullptr) {
-        if (actual->getPersonita()->esEstudiante()) {
+        if (actual->getPersonita() != nullptr && actual->getPersonita()->esEstudiante()) {
             fprintf (archivo, "%s", actual->getPersonita()->toString().c_str());
             actual = actual->getSiguiente();
         }

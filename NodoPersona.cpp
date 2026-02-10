@@ -14,7 +14,7 @@ NodoPersona::NodoPersona(Persona *personita, NodoPersona *siguiente) {
     this->siguiente = siguiente;
 }
 
-Persona *NodoPersona::getPersonita() {
+Persona *NodoPersona::getPersonita() const{
     return this-> personita;
 }
 void NodoPersona::setPersonita(Persona *personita) {
@@ -23,13 +23,11 @@ void NodoPersona::setPersonita(Persona *personita) {
 void NodoPersona::setSiguiente(NodoPersona *siguiente) {
     this-> siguiente = siguiente;
 }
-NodoPersona *NodoPersona::getSiguiente() {
+NodoPersona *NodoPersona::getSiguiente() const{
     return this->siguiente;
 }
 
 NodoPersona::~NodoPersona() {
     delete personita;
-    delete siguiente;
     personita = nullptr;
-    siguiente = nullptr;
 }
