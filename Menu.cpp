@@ -37,7 +37,7 @@ void Menu::iniciarSesionAdministrador() {
 
     int opcion;
     do {
-        cout << "\n--- Menú Administrador ---\n";
+        cout << "\n--- Menu Administrador ---\n";
         cout << "1. Registrar Estudiante\n";
         cout << "2. Registrar Profesor\n";
         cout << "3. Registrar Curso\n";
@@ -48,7 +48,7 @@ void Menu::iniciarSesionAdministrador() {
         cout << "8. Mostrar Profesores\n";
         cout << "9. Mostrar Cursos\n";
         cout << "10. Salir\n";
-        cout << "Elija una opción: ";
+        cout << "Elija una opcion: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -87,6 +87,7 @@ void Menu::iniciarSesionAdministrador() {
                 break;
         }
     } while (opcion != 10);
+    mostrarMenu();
 }
 
 
@@ -164,7 +165,7 @@ void Menu::registrarCurso() {
     getline(cin, nombre);
     cout << "Ingrese la cedula del profesor asignado: ";
     cin >> cedulaProfesor;
-    cout<<"Ingrese el dia y hora del curso: "<<endl;
+    cout<<"Ingrese el dia [0-4] y hora [0-13] del curso: "<<endl;
     cin.ignore();
     cin>>diaC;
     cin>>horaC;
