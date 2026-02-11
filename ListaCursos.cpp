@@ -40,19 +40,19 @@ bool ListaCursos::eliminarC(string codCurso) {
     if (estaVaciaC()) {
         return false;
     }
-    if (primero->getCurso()->getCodigo()==codCurso) {
-        NodoCurso* borrar = primero;
+    if (primero->getCurso()->getCodigo() == codCurso) {
+        NodoCurso* chao = primero;
         primero = primero->getSiguiente();
         if (primero == nullptr) {
             ultimo = nullptr;
         }
-        delete borrar;
+        delete chao;
         cantidad--;
         return true;
     }
     NodoCurso* actual = primero;
-    while (actual != nullptr) {
-        if (actual->getSiguiente()->getCurso()->getCodigo()==codCurso) {
+    while (actual != nullptr && actual->getSiguiente() != nullptr) {
+        if (actual->getSiguiente()->getCurso()->getCodigo() == codCurso) {
             NodoCurso* borrar = actual->getSiguiente();
             actual->setSiguiente(borrar->getSiguiente());
             if (borrar == ultimo) {
@@ -88,7 +88,9 @@ string ListaCursos::toString() const {
     stringstream ss;
     NodoCurso* actual = primero;
     while (actual != nullptr) {
-        ss << actual->getCurso()->toString() << "----------------------"<<endl;
+        if (actual->getCurso() != nullptr) {
+            ss << actual->getCurso()->toString() << "----------------------"<<endl;
+        }
         actual = actual->getSiguiente();
     }
     return ss.str();
