@@ -5,7 +5,10 @@
 #include "SistemaU.h"
 void SistemaU::registrarEstudiante(int cedula, string nombre, string carrera) {
     Estudiante* nuevoEstudiante = new Estudiante(nombre, cedula, carrera);
-    bool s = listaEstudiantes.agregarFinal(nuevoEstudiante);
+    bool s = false;
+    if (listaEstudiantes.agregarFinal(nuevoEstudiante)) {
+        s = true;
+    }
 
     if (!s) {
         cout<<"No se pudo agregar, estudiante ya ingresado"<<endl;
@@ -37,11 +40,15 @@ void SistemaU::mostrarHorario() {
         cout << estudiante->mostrarHorario() << endl;
     } else {
         cout << "Estudiante no encontrado o no es un estudiante.\n";
-    }}
+    }
+}
 
 void SistemaU::registrarProfesor(int cedula, string nombre) {
     Profesor* nuevoProfesor = new Profesor(nombre, cedula);
-    bool s = listaProfesores.agregarFinal(nuevoProfesor);
+    bool s = false;
+    if (listaProfesores.agregarFinal(nuevoProfesor)) {
+        s =true;
+    }
 
     if (!s) {
         cout<<"No se pudo agregar, profesor ya ingresado"<<endl;
@@ -104,7 +111,7 @@ string SistemaU::mostrarCursos() const {
     if (listaCursos.getCantidad() == 0) {
         ss<<"No hay cursos";
     }else{
-    ss << listaCursos.toString();
+        ss << listaCursos.toString();
     }
     return ss.str();
 }
@@ -126,7 +133,7 @@ ListaCursos * SistemaU::getListaCursos() {
 }
 
 void SistemaU::guardarDatosTXT() {
-    FILE* Archivo = fopen("Archivo.txt", "w");
+    FILE* Archivo = fopen("ArchivoProyecto.txt", "w");
     if (!Archivo) {
         cout << "ERROR DE ARCHIVO\n";
         return;
@@ -138,7 +145,9 @@ void SistemaU::guardarDatosTXT() {
     listaProfesores.guardarEnArchivoProfesores(Archivo);
     fprintf(Archivo, "\nCURSOS:\n");
     listaCursos.guardarEnArchivo(Archivo);
-    cout<<"Anadidos correctamente "<<endl;
+
+    fclose(Archivo);
+    printf("Datos guardados exitosamente en ArchivoProyecto.txt\n");
 }
 
 bool SistemaU::eliminarEstudiante(int cedula) {

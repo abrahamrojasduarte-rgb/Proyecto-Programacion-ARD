@@ -20,20 +20,17 @@ void Menu::mostrarMenu() {
             iniciarSesionEstudiante();
             break;
         case 3:
-            cout << "Gracias por usar el sistema. ¡Adios!" << endl;
+            cout << "Gracias por usar el sistema" << endl;
             break;
         default:
-            cout << "Opcion no válida. Intente de nuevo." << endl;
+            cout << "Opcion no valida. Intente de nuevo" << endl;
             mostrarMenu();
             break;
     }
 }
 void Menu::iniciarSesionAdministrador() {
-    string usuario;
-    cout << "Ingrese su nombre de usuario: ";
-    cin >> usuario;
 
-    cout << "Bienvenido, administrador: " << usuario << endl;
+    cout << "Bienvenido admin " << endl;
 
     int opcion;
     do {
@@ -80,10 +77,10 @@ void Menu::iniciarSesionAdministrador() {
                 mostrarCursos();
                 break;
             case 10:
-                cout << "Saliendo del menú administrador...\n";
+                cout << "Saliendo del menu administrador...\n";
                 break;
             default:
-                cout << "Opción no válida. Intente de nuevo." << endl;
+                cout << "Opción no valida. Intente de nuevo." << endl;
                 break;
         }
     } while (opcion != 10);
@@ -92,11 +89,7 @@ void Menu::iniciarSesionAdministrador() {
 
 
 void Menu::iniciarSesionEstudiante() {
-    string usuario;
-    cout << "Ingrese su nombre de usuario: ";
-    cin >> usuario;
-
-    cout << "Bienvenido, estudiante: " << usuario << endl;
+    cout << "Bienvenido estudiante "<< endl;
 
     int opcion;
     do {
@@ -104,7 +97,7 @@ void Menu::iniciarSesionEstudiante() {
         cout << "1. Ver Cursos Disponibles\n";
         cout << "2. Escoger Curso\n";
         cout << "3. Mostrar horario\n";
-        cout << "4. Quitar curso \n ";
+        cout << "4. Quitar curso \n";
         cout << "5. Salir\n";
         cout << "Elija una opcion: ";
         cin >> opcion;
@@ -118,11 +111,12 @@ void Menu::iniciarSesionEstudiante() {
                 break;
             case 3:
                 mostrarHorario();
+                break;
             case 4:
                 quitarCurso();
                 break;
             case 5:
-                cout << "Saliendo del menu estudiante...\n";
+                cout << "Saliendo del menu estudiante\n";
                 break;
             default:
                 cout << "Opcion no valida. Intente de nuevo." << endl;
@@ -223,7 +217,7 @@ void Menu::mostrarHorario() {
 
     Persona* persona = sistema.getListaEstudiantes()->buscar(cedulaEstudiante);
     if (persona != nullptr && persona->esEstudiante()) {
-        Estudiante* estudiante = (Estudiante*) persona;
+        Estudiante* estudiante = (Estudiante*)persona;
         cout << "Horario de " << estudiante->getNombre() << ":\n";
         cout << estudiante->mostrarHorario() << endl;
     } else {
@@ -274,9 +268,9 @@ void Menu::quitarCurso() {
     int cedulaEstudiante, dia, hora;
     cout << "Ingrese su cédula: ";
     cin >> cedulaEstudiante;
-    cout << "Ingrese el día (0: Lunes, 1: Martes, ...): ";
+    cout << "Ingrese el día [0-4]: ";
     cin >> dia;
-    cout << "Ingrese la hora (0-13): ";
+    cout << "Ingrese la hora [0-13]: ";
     cin >> hora;
 
     Persona* persona = sistema.getListaEstudiantes()->buscar(cedulaEstudiante);
