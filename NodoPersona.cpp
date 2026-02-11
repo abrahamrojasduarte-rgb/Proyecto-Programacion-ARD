@@ -20,7 +20,7 @@ Persona *NodoPersona::getPersonita() const{
 void NodoPersona::setPersonita(Persona *personita) {
     this-> personita = personita;
 }
-void NodoPersona::setSiguiente(NodoPersona *siguiente) {
+void NodoPersona::setSiguiente(NodoPersona* siguiente) {
     this-> siguiente = siguiente;
 }
 NodoPersona *NodoPersona::getSiguiente() const{

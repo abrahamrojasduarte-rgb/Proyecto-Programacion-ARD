@@ -118,6 +118,6 @@ void ListaCursos::guardarEnArchivo(FILE *Archivo) {
     }
 }
 
-NodoCurso * ListaCursos::getPrimero() {
+NodoCurso * ListaCursos::getPrimero() const{
     return this->primero;
 }
