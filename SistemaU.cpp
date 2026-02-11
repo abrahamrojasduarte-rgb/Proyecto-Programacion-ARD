@@ -169,19 +169,19 @@ bool SistemaU::eliminarEstudiante(int cedula) {
 bool SistemaU::eliminarProfesor(int cedula) {
     Persona* persona = listaProfesores.buscar(cedula);
     if (persona != nullptr && persona->esProfesor()) {
+        NodoCurso* actual = listaCursos.getPrimero();
+        while (actual != nullptr) {
+            if (actual->getCurso()->getProfesor() == persona) {
+                string codCurso = actual->getCurso()->getCodigo();
+                if (listaCursos.eliminarC(codCurso)) {
+                    cout << "Curso con codigo " << codCurso << " ligado al profesor/a " << persona->getNombre() << " eliminado." << endl;
+                }
+            }
+            actual = actual->getSiguiente();
+        }
+
         if (listaProfesores.elimina(cedula)) {
             cout << "Profesor eliminado correctamente." << endl;
-
-            NodoCurso* actual = listaCursos.getPrimero();
-            while (actual != nullptr) {
-                if (actual->getCurso()->getProfesor() == persona) {
-                    string codCurso = actual->getCurso()->getCodigo();
-                    if (listaCursos.eliminarC(codCurso)) {
-                        cout << "Curso ligados al profesor eliminado. Codigo" << codCurso<< endl;
-                    }
-                }
-                actual = actual->getSiguiente();
-            }
             return true;
         } else {
             cout << "No se pudo eliminar el profesor. Verifique si está en la lista." << endl;

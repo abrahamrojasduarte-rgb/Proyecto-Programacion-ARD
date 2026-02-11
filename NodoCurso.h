@@ -12,12 +12,14 @@ private:
     NodoCurso *siguiente;
     Curso* cursillo;
 public:
-    NodoCurso();
-    NodoCurso(Curso* cursillo, NodoCurso *siguiente);
+    NodoCurso(Curso* curso, NodoCurso* sig);
+
     ~NodoCurso();
-    void setSiguiente(NodoCurso* siguiente);
-    NodoCurso* getSiguiente();
-    Curso* getCurso();
+
+    Curso* getCurso() const;
+    NodoCurso* getSiguiente() const;
+
+    void setSiguiente(NodoCurso* sig);
 };
 
 

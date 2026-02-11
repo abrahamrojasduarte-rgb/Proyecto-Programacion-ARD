@@ -28,6 +28,5 @@ NodoPersona *NodoPersona::getSiguiente() const{
 }
 
 NodoPersona::~NodoPersona() {
-    delete personita;
     personita = nullptr;
 }

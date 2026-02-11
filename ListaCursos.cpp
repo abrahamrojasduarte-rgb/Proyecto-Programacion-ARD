@@ -40,6 +40,7 @@ bool ListaCursos::eliminarC(string codCurso) {
     if (estaVaciaC()) {
         return false;
     }
+
     if (primero->getCurso()->getCodigo() == codCurso) {
         NodoCurso* chao = primero;
         primero = primero->getSiguiente();
@@ -48,8 +49,10 @@ bool ListaCursos::eliminarC(string codCurso) {
         }
         delete chao;
         cantidad--;
+        cout << "Curso con código " << codCurso << " eliminado correctamente." << endl;
         return true;
     }
+
     NodoCurso* actual = primero;
     while (actual != nullptr && actual->getSiguiente() != nullptr) {
         if (actual->getSiguiente()->getCurso()->getCodigo() == codCurso) {
@@ -64,6 +67,8 @@ bool ListaCursos::eliminarC(string codCurso) {
         }
         actual = actual->getSiguiente();
     }
+
+    cout << "Curso con código " << codCurso << " no encontrado." << endl;
     return false;
 }
 
@@ -103,7 +108,6 @@ ListaCursos::~ListaCursos() {
     NodoCurso* actual = primero;
     while (actual != nullptr) {
         NodoCurso* borrar = actual;
-        delete actual->getCurso();
         actual = actual->getSiguiente();
         delete borrar;
     }

@@ -4,10 +4,6 @@
 
 #include "NodoCurso.h"
 
-NodoCurso::NodoCurso() {
-    this->cursillo = nullptr;
-    this->siguiente = nullptr;
-}
 
 NodoCurso::NodoCurso(Curso *cursillo, NodoCurso *siguiente) {
     this->cursillo = cursillo;
@@ -24,9 +20,9 @@ void NodoCurso::setSiguiente(NodoCurso *siguiente) {
     this->siguiente = siguiente;
 }
 
-Curso * NodoCurso::getCurso() {
+Curso * NodoCurso::getCurso()const {
     return this->cursillo;
 }
-NodoCurso* NodoCurso::getSiguiente() {
+NodoCurso* NodoCurso::getSiguiente()const {
     return this->siguiente;
 }

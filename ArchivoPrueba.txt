@@ -1,11 +1,3 @@
-#include <iostream>
-#include "SistemaU.h"
-#include "Menu.h"
-
-
-using namespace std;
-
-int main() {
      SistemaU sistema;
 
     cout << "Registrando estudiantes..." << endl;
@@ -57,11 +49,3 @@ int main() {
 
     cout << "\n--- Guardar Datos en Archivo ---" << endl;
     sistema.guardarDatosTXT();
-
-
-    // Menu menumain;
-    //
-    // menumain.mostrarMenu();
-
-    return 0;
-};
