@@ -91,12 +91,14 @@ void SistemaU::registrarCursos(string codCurso, string nomCurso, int cedulaP, in
 
     Profesor* profesor = (Profesor*)persona;
 
-    for (int i = 0; i < listaCursos.getCantidad(); i++) {
-        Curso* cursoExistente = listaCursos.buscarC(codCurso);
-        if (cursoExistente != nullptr && cursoExistente->getDia() == d && cursoExistente->getHora() == h) {
-            cout << "Conflicto de horario. El curso ya está asignado." << endl;
+    NodoCurso* nodoActual = listaCursos.getPrimero();
+    while (nodoActual != nullptr) {
+        Curso* cursoExistente = nodoActual->getCurso();
+        if (cursoExistente->getDia() == d && cursoExistente->getHora() == h) {
+            cout << "Conflicto de horario. Ya existe un curso en ese día y hora." << endl;
             return;
         }
+        nodoActual = nodoActual->getSiguiente();
     }
     Curso* nuevoCurso = new Curso(codCurso, nomCurso, profesor, d, h);
     if (listaCursos.agrgarFinalC(nuevoCurso)) {

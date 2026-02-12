@@ -40,7 +40,8 @@ bool Horario::asignarCurso(Curso *curso, int dia, int hora) {
     }
 
     if (curso == nullptr) {
-        return false;
+        matriz[dia][hora] = nullptr;
+        return true;
     }
 
     if (matriz[dia][hora] != nullptr) {

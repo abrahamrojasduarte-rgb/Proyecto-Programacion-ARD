@@ -73,6 +73,7 @@ bool ListaPersona::elimina(int c) {
         if (primero == nullptr) {
             ultimo = nullptr;
         }
+        delete chao->getPersonita();
         delete chao;
         cantidad--;
         return true;
@@ -86,6 +87,7 @@ bool ListaPersona::elimina(int c) {
             if (borrar == ultimo) {
                 ultimo = aux;
             }
+            delete borrar->getPersonita();
             delete borrar;
             cantidad--;
             return true;
@@ -121,8 +123,8 @@ void ListaPersona::guardarEnArchivoEstudiantes(FILE *archivo) {
     while (actual != nullptr) {
         if (actual->getPersonita() != nullptr && actual->getPersonita()->esEstudiante()) {
             fprintf (archivo, "%s", actual->getPersonita()->toString().c_str());
-            actual = actual->getSiguiente();
         }
+        actual = actual->getSiguiente();
     }
 }
 

@@ -160,7 +160,6 @@ void Menu::registrarCurso() {
     cout << "Ingrese la cedula del profesor asignado: ";
     cin >> cedulaProfesor;
     cout<<"Ingrese el dia [0-4] y hora [0-13] del curso: "<<endl;
-    cin.ignore();
     cin>>diaC;
     cin>>horaC;
 
