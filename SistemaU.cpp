@@ -154,10 +154,8 @@ bool SistemaU::eliminarEstudiante(int cedula) {
     Persona* persona = listaEstudiantes.buscar(cedula);
     if (persona != nullptr && persona->esEstudiante()) {
         if (listaEstudiantes.elimina(cedula)) {
-            cout << "Estudiante eliminado correctamente." << endl;
             return true;
         } else {
-            cout << "No se pudo eliminar el estudiante. Verifique si está en la lista." << endl;
             return false;
         }
     } else {
@@ -181,10 +179,8 @@ bool SistemaU::eliminarProfesor(int cedula) {
         }
 
         if (listaProfesores.elimina(cedula)) {
-            cout << "Profesor eliminado correctamente." << endl;
             return true;
         } else {
-            cout << "No se pudo eliminar el profesor. Verifique si está en la lista." << endl;
             return false;
         }
     } else {
@@ -196,10 +192,8 @@ bool SistemaU::eliminarCurso(string codCurso) {
     Curso* curso = listaCursos.buscarC(codCurso);
     if (curso != nullptr) {
         if (listaCursos.eliminarC(codCurso)) {
-            cout << "Curso eliminado correctamente." << endl;
             return true;
         } else {
-            cout << "No se pudo eliminar el curso " << codCurso << endl;
             return false;
         }
     } else {

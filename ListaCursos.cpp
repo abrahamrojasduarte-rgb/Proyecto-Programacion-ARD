@@ -49,7 +49,6 @@ bool ListaCursos::eliminarC(string codCurso) {
         }
         delete chao;
         cantidad--;
-        cout << "Curso con código " << codCurso << " eliminado correctamente." << endl;
         return true;
     }
 

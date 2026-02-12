@@ -42,7 +42,8 @@ string Curso::toString() const {
     stringstream ss;
     ss<<"Nombre :"<<this->nombre<<endl
         <<"Codigo :"<<this->codigo<<endl
-        <<"Profesor :"<<this->profesorAsignado->getNombre()<<endl;
+        <<"Profesor :"<<this->profesorAsignado->getNombre()<<endl
+        <<"Dia :"<<this->dia<< "Hora :"<<this->hora<<endl;
     return ss.str();
 }
 
